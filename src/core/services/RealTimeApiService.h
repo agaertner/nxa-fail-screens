@@ -1,6 +1,6 @@
 #ifndef REALTIMEAPISERVICE_H
 #define REALTIMEAPISERVICE_H
-#include "Defines.h"
+#include "../../Defines.h"
 #ifdef USE_RTAPI
 namespace Nekres::Services
 {
@@ -12,13 +12,13 @@ namespace Nekres::Services
             RealTimeApiService(AddonAPI_t* p_api);
             ~RealTimeApiService();
 
-            RTAPI::RealTimeData* Data() const;
+            RealTimeData* Data() const;
 
         private:
             inline static RealTimeApiService* m_instance = nullptr;
 
             AddonAPI_t* m_api;
-            RTAPI::RealTimeData* m_rtdata;
+            RealTimeData* m_rtdata;
 
             static void OnAddonLoaded(void* aSignature)
             {
@@ -28,7 +28,7 @@ namespace Nekres::Services
                     if (!sig) { return; }
                     
                     // Initialize real time API.
-                    if (*sig == RTAPI_SIG) m_instance->m_rtdata = (RTAPI::RealTimeData*)m_instance->m_api->DataLink_Get(DL_RTAPI);
+                    if (*sig == RTAPI_SIG) m_instance->m_rtdata = (RealTimeData*)m_instance->m_api->DataLink_Get(DL_RTAPI);
                 }
             }
 

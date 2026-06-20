@@ -1,6 +1,6 @@
 #ifndef GW2MUMBLESERVICE_H
 #define GW2MUMBLESERVICE_H
-#include "Defines.h"
+#include "../../Defines.h"
 #ifdef USE_MUMBLE
 namespace Nekres::Services
 {

@@ -6,8 +6,7 @@
 #include "thirdparty/nlohmann/json.hpp"
 using json = nlohmann::json;
 
-extern const char* IS_EXAMPLE_ENABLED;
-extern const char* EXAMPLE_DROPDOWN_INDEX;
+extern const char* ACTIVE_SCREEN;
 
 namespace Settings
 {
@@ -24,8 +23,17 @@ namespace Settings
     // ========================================================================
     // These variables are globally accessible across the addon's code.
     // Include "Settings.h" anywhere and access them via Settings::IsExampleEnabled.
-    extern bool IsExampleEnabled;
-    extern int ExampleDropdownIndex;
+    extern int ActiveScreen;
+
+    extern bool Randomize;
+    extern bool EnableDarkSouls;
+    extern bool EnableGrandTheftAuto;
+    extern bool EnableRytlocksCritterRampage;
+    extern bool EnableAngryPepe;
+    extern bool EnableSekiro;
+    extern bool EnableWinXp;
+
+    extern float Volume;
 }
 
 #endif

@@ -1,0 +1,36 @@
+#include "resource.h"
+
+IDR_WAV_DARKSOULS      WAVE    "assets/screens/darksouls/darksouls_death.wav"
+IDR_TEX_DARKSOULS_EN   RCDATA  "assets/screens/darksouls/en-darksouls.png"
+IDR_TEX_DARKSOULS_DE   RCDATA  "assets/screens/darksouls/de-darksouls.png"
+IDR_TEX_DARKSOULS_ES   RCDATA  "assets/screens/darksouls/es-darksouls.png"
+IDR_TEX_DARKSOULS_FR   RCDATA  "assets/screens/darksouls/fr-darksouls.png"
+
+IDR_WAV_ANGRYPEPE      WAVE    "assets/screens/angrypepe/reeee.wav"
+IDR_TEX_ANGRYPEPE      RCDATA  "assets/screens/angrypepe/angry-pepe.png"
+
+IDR_WAV_GTA            WAVE    "assets/screens/gta/gta_wasted.wav"
+IDR_TEX_GTA_EN         RCDATA  "assets/screens/gta/en-wasted.png"
+IDR_TEX_GTA_DE         RCDATA  "assets/screens/gta/de-wasted.png"
+IDR_TEX_GTA_ES         RCDATA  "assets/screens/gta/es-wasted.png"
+IDR_TEX_GTA_FR         RCDATA  "assets/screens/gta/fr-wasted.png"
+IDR_TEX_GTA_PHOTO      RCDATA  "assets/screens/gta/photo-vignette.png"
+IDR_TEX_GTA_FLASH      RCDATA  "assets/screens/gta/flash-vignette.png"
+
+IDR_WAV_RYTLOCK        WAVE    "assets/screens/rytlock/new_music_sadending.wav"
+IDR_TEX_RYTLOCK_0      RCDATA  "assets/screens/rytlock/sad_rytlock-sheet0.png"
+IDR_TEX_RYTLOCK_1      RCDATA  "assets/screens/rytlock/sad_rytlock-sheet1.png"
+IDR_TEX_RYTLOCK_2      RCDATA  "assets/screens/rytlock/sad_rytlock-sheet2.png"
+IDR_TEX_RYTLOCK_3      RCDATA  "assets/screens/rytlock/sad_rytlock-sheet3.png"
+IDR_TEX_RYTLOCK_4      RCDATA  "assets/screens/rytlock/sad_rytlock-sheet4.png"
+IDR_TEX_RYTLOCK_5      RCDATA  "assets/screens/rytlock/sad_rytlock-sheet5.png"
+
+IDR_WAV_SEKIRO         WAVE    "assets/screens/sekiro/sekiro_death.wav"
+IDR_TEX_SEKIRO         RCDATA  "assets/screens/sekiro/sekiro_death.png"
+IDR_TEX_SEKIRO_OUT     RCDATA  "assets/screens/sekiro/sekiro_death_out.png"
+
+IDR_WAV_WINXP          WAVE    "assets/screens/winxp/winxp-error.wav"
+IDR_TEX_WINXP          RCDATA  "assets/screens/winxp/winxp-error.png"
+
+IDR_FONT_ATHELAS       RCDATA  "assets/fonts/Athelas-Regular.ttf"
+IDR_FONT_CONSOLA       RCDATA  "assets/fonts/CONSOLA.TTF"

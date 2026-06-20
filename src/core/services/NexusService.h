@@ -1,6 +1,6 @@
 #ifndef NEXUSSERVICE_H
 #define NEXUSSERVICE_H
-#include "Defines.h"
+#include "../../Defines.h"
 
 namespace Nekres::Services
 {

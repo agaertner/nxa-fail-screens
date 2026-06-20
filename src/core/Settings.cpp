@@ -4,9 +4,9 @@
 
 #include <filesystem>
 #include <fstream>
+#include <cmath>
 
-const char* IS_EXAMPLE_ENABLED = "IsExampleEnabled";
-const char* EXAMPLE_DROPDOWN_INDEX = "ExampleDropdownIndex";
+const char* ACTIVE_SCREEN = "ActiveScreen";
 namespace Settings
 {
     std::mutex    Mutex;
@@ -21,8 +21,18 @@ namespace Settings
             try
             {
                 std::ifstream file(aPath);
-                Settings = json::parse(file);
-                file.close();
+                json j = json::parse(file);
+                if (j.contains("ActiveScreen")) {
+                    ActiveScreen = j["ActiveScreen"].get<int>();
+                }
+            if (j.contains("Randomize")) Randomize = j["Randomize"].get<bool>();
+            if (j.contains("EnableDarkSouls")) EnableDarkSouls = j["EnableDarkSouls"].get<bool>();
+            if (j.contains("EnableGrandTheftAuto")) EnableGrandTheftAuto = j["EnableGrandTheftAuto"].get<bool>();
+            if (j.contains("EnableRytlocksCritterRampage")) EnableRytlocksCritterRampage = j["EnableRytlocksCritterRampage"].get<bool>();
+            if (j.contains("EnableAngryPepe")) EnableAngryPepe = j["EnableAngryPepe"].get<bool>();
+            if (j.contains("EnableSekiro")) EnableSekiro = j["EnableSekiro"].get<bool>();
+            if (j.contains("EnableWinXp")) EnableWinXp = j["EnableWinXp"].get<bool>();
+            if (j.contains("Volume")) Volume = j["Volume"].get<float>();    file.close();
             }
             catch (json::parse_error& ex)
             {
@@ -31,19 +41,6 @@ namespace Settings
             }
         }
         Settings::Mutex.unlock();
-
-        // ========================================================================
-        // SETTINGS GETTER (JSON Parsing)
-        // ========================================================================
-        // Read the value from the parsed JSON and apply it to a global variable.
-        if (!Settings[IS_EXAMPLE_ENABLED].is_null())
-        {
-            Settings[IS_EXAMPLE_ENABLED].get_to<bool>(IsExampleEnabled);
-        }
-        if (!Settings[EXAMPLE_DROPDOWN_INDEX].is_null())
-        {
-            Settings[EXAMPLE_DROPDOWN_INDEX].get_to<int>(ExampleDropdownIndex);
-        }
     }
     void Save(std::filesystem::path aPath)
     {
@@ -53,11 +50,19 @@ namespace Settings
             // SETTINGS SETTER (JSON Serialization)
             // ========================================================================
             // Assign global variables back into the JSON object before saving.
-            Settings[IS_EXAMPLE_ENABLED] = IsExampleEnabled;
-            Settings[EXAMPLE_DROPDOWN_INDEX] = ExampleDropdownIndex;
+        nlohmann::json j;
+        j["ActiveScreen"] = ActiveScreen;
+        j["Randomize"] = Randomize;
+        j["EnableDarkSouls"] = EnableDarkSouls;
+        j["EnableGrandTheftAuto"] = EnableGrandTheftAuto;
+        j["EnableRytlocksCritterRampage"] = EnableRytlocksCritterRampage;
+        j["EnableAngryPepe"] = EnableAngryPepe;
+        j["EnableSekiro"] = EnableSekiro;
+        j["EnableWinXp"] = EnableWinXp;
+        j["Volume"] = std::round((double)Volume * 1000.0) / 1000.0;
 
             std::ofstream file(aPath);
-            file << Settings.dump(1, '\t') << std::endl;
+            file << j.dump(1, '\t') << std::endl;
             file.close();
         }
         Settings::Mutex.unlock();
@@ -66,6 +71,15 @@ namespace Settings
     // ========================================================================
     // SETTINGS DEFAULT VALUES
     // ========================================================================
-    bool IsExampleEnabled = true;
-    int ExampleDropdownIndex = 0;
+    int ActiveScreen = 0;
+
+    bool Randomize = false;
+    bool EnableDarkSouls = true;
+    bool EnableGrandTheftAuto = true;
+    bool EnableRytlocksCritterRampage = true;
+    bool EnableAngryPepe = true;
+    bool EnableSekiro = true;
+    bool EnableWinXp = true;
+
+    float Volume = 0.5f;
 }

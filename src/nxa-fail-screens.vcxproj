@@ -24,7 +24,7 @@
     <ProjectGuid>{43482f53-bd38-4bb0-bdb6-615366bc802d}</ProjectGuid>
     <RootNamespace>nxawindowresize</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>nxa-addon-template</ProjectName>
+    <ProjectName>nxa-fail-screens</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -157,10 +157,24 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="core\DeathMonitor.h" />
+    <ClInclude Include="core\ScreenOrchestrator.h" />
+    <ClInclude Include="core\SettingsUI.h" />
     <ClInclude Include="core\Addon.h" />
+    <ClInclude Include="core\utils\AsyncTexture.h" />
+    <ClInclude Include="core\utils\AsyncFont.h" />
+    <ClInclude Include="core\screens\FailScreen.h" />
+    <ClInclude Include="core\screens\DarkSouls.h" />
+    <ClInclude Include="core\screens\AngryPepe.h" />
+    <ClInclude Include="core\screens\GrandTheftAuto.h" />
+    <ClInclude Include="core\screens\RytlocksCritterRampage.h" />
+    <ClInclude Include="core\screens\Sekiro.h" />
+    <ClInclude Include="core\screens\WinXp.h" />
     <ClInclude Include="core\services\Gw2MumbleService.h" />
     <ClInclude Include="core\services\RealTimeApiService.h" />
     <ClInclude Include="core\services\NexusService.h" />
+    <ClInclude Include="core\managers\AudioManager.h" />
+    <ClInclude Include="core\managers\LocalManager.h" />
     <ClInclude Include="..\submodules\nexus-mumble\Mumble.h" />
     <ClInclude Include="..\submodules\nexus-core\Nexus.h" />
     <ClInclude Include="resource.h" />
@@ -175,10 +189,24 @@
     <ClInclude Include="Version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="core\DeathMonitor.cpp" />
+    <ClCompile Include="core\ScreenOrchestrator.cpp" />
+    <ClCompile Include="core\SettingsUI.cpp" />
+    <ClCompile Include="core\screens\FailScreen.cpp" />
     <ClCompile Include="core\Addon.cpp" />
+    <ClCompile Include="core\utils\AsyncTexture.cpp" />
+    <ClCompile Include="core\utils\AsyncFont.cpp" />
+    <ClCompile Include="core\screens\DarkSouls.cpp" />
+    <ClCompile Include="core\screens\AngryPepe.cpp" />
+    <ClCompile Include="core\screens\GrandTheftAuto.cpp" />
+    <ClCompile Include="core\screens\RytlocksCritterRampage.cpp" />
+    <ClCompile Include="core\screens\Sekiro.cpp" />
+    <ClCompile Include="core\screens\WinXp.cpp" />
     <ClCompile Include="core\services\Gw2MumbleService.cpp" />
     <ClCompile Include="core\services\RealTimeApiService.cpp" />
     <ClCompile Include="core\services\NexusService.cpp" />
+    <ClCompile Include="core\managers\AudioManager.cpp" />
+    <ClCompile Include="core\managers\LocalManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="core\Settings.cpp" />
     <ClCompile Include="..\submodules\imgui\imgui.cpp" />
@@ -186,6 +214,9 @@
     <ClCompile Include="..\submodules\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\submodules\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\submodules\imgui\imgui_widgets.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

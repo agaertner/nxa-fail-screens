@@ -4,3 +4,9 @@
 [submodule "submodules/imgui"]
 	path = submodules/imgui
 	url = https://github.com/RaidcoreGG/imgui18000.git
+[submodule "submodules/nexus-rtapi"]
+	path = submodules/nexus-rtapi
+	url = https://github.com/RaidcoreGG/GW2-RealTime-API-Releases.git
+[submodule "submodules/nexus-mumble"]
+	path = submodules/nexus-mumble
+	url = https://github.com/RaidcoreGG/RCGG-lib-mumble-api.git

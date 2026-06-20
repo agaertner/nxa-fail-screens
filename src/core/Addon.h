@@ -1,13 +1,14 @@
 #ifndef ADDON_H
 #define ADDON_H
-#include <cmath>
-#include <vector>
+
 #include <filesystem>
-#include <fstream>
-#include <DirectXMath.h>
-#include "Settings.h"
-#include "imgui/imgui.h"
+#include <memory>
+#include "../submodules/nexus-core/Nexus.h"
 #include "services/Services.h"
+#include "DeathMonitor.h"
+#include "ScreenOrchestrator.h"
+#include "SettingsUI.h"
+
 namespace Nekres {
     class Addon
     {
@@ -16,9 +17,7 @@ namespace Nekres {
 
         public:
             Addon(AddonDefinition_t* p_addonDef, AddonAPI_t* p_api);
-
             ~Addon();
-
 
             static void Log(ELogLevel p_logLevel, const char* p_message) {
                 if (m_instance) {
@@ -35,6 +34,8 @@ namespace Nekres {
 
             void Render();
             void Options();
+            
+            static UINT WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
         private:
             inline static Addon* m_instance = nullptr;
@@ -45,9 +46,12 @@ namespace Nekres {
             std::filesystem::path m_addonPath;
             std::filesystem::path m_settingsPath;
 
+            std::unique_ptr<DeathMonitor> m_deathMonitor;
+            std::unique_ptr<ScreenOrchestrator> m_orchestrator;
+            std::unique_ptr<SettingsUI> m_settingsUI;
+
             static void AddonRender() { m_instance->Render(); }
             static void AddonOptions() { m_instance->Options(); }
     };
-
 }
 #endif

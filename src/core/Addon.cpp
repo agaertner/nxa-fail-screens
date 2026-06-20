@@ -1,97 +1,116 @@
 #include "Addon.h"
-#include <algorithm>
-#include <cctype>
+#include "Settings.h"
+#include "imgui/imgui.h"
+#include "services/Gw2MumbleService.h"
+#include "services/NexusService.h"
+#include "services/RealTimeApiService.h"
 
-Nekres::Addon::Addon(AddonDefinition_t* p_addonDef, AddonAPI_t* p_api) : 
-    m_addonDef(p_addonDef), m_api(p_api)
-{
-#ifdef USE_MUMBLE
-    Services::Mumble(p_api);
-#endif
-    Services::Nexus(p_api);
-#ifdef USE_RTAPI
-    Services::RTAPI(p_api);
-#endif
+extern HMODULE hSelf;
 
-    m_instance = this;
-    ImGui::SetCurrentContext((ImGuiContext*)m_api->ImguiContext);
-    if (m_api->ImguiMalloc && m_api->ImguiFree) {
-        ImGui::SetAllocatorFunctions((void* (*)(size_t, void*))m_api->ImguiMalloc, (void(*)(void*, void*))m_api->ImguiFree); // on imgui 1.80+
-    }
+namespace Nekres {
 
-    std::string folderName = m_addonDef->Name;
-    folderName.erase(std::remove_if(folderName.begin(), folderName.end(), ::isspace), folderName.end());
-
-    m_addonPath = m_api->Paths_GetAddonDirectory(folderName.c_str());
-    m_settingsPath = m_addonPath / "settings.json";
-    std::filesystem::create_directories(m_addonPath);
-    Settings::Load(m_settingsPath);
-    m_api->GUI_Register(ERenderType::RT_Render, AddonRender);
-    m_api->GUI_Register(ERenderType::RT_OptionsRender, AddonOptions);
-}
-
-Nekres::Addon::~Addon()
-{
-    m_api->GUI_Deregister(AddonOptions);
-    m_api->GUI_Deregister(AddonRender);
-#ifdef USE_MUMBLE
-    delete Services::m_mumble;
-    Services::m_mumble = nullptr;
-#endif
-    delete Services::m_nexus;
-    Services::m_nexus = nullptr;
-#ifdef USE_RTAPI
-    delete Services::m_rtapi;
-    Services::m_rtapi = nullptr;
-#endif
-    delete m_api;
-    Settings::Save(m_settingsPath);
-    m_instance = nullptr;
-}
-
-void Nekres::Addon::Render()
-{
-}
-
-void Nekres::Addon::Options()
-{
-    // ========================================================================
-    // SETTINGS UI
-    // ========================================================================
-    if (ImGui::Checkbox("Enable Example Feature", &Settings::IsExampleEnabled))
+    Addon::Addon(AddonDefinition_t* p_addonDef, AddonAPI_t* p_api)
+        : m_addonDef(p_addonDef), m_api(p_api)
     {
-        Settings::Save(m_settingsPath); // Automatically save when clicked
+        m_instance = this;
+
+        ImGui::SetCurrentContext((ImGuiContext*)m_api->ImguiContext);
+        if (m_api->ImguiMalloc && m_api->ImguiFree) {
+            ImGui::SetAllocatorFunctions((void* (*)(size_t, void*))m_api->ImguiMalloc, (void(*)(void*, void*))m_api->ImguiFree);
+        }
+
+        std::string folderName = m_addonDef->Name;
+        folderName.erase(std::remove_if(folderName.begin(), folderName.end(), ::isspace), folderName.end());
+
+        m_addonPath = m_api->Paths_GetAddonDirectory(folderName.c_str());
+        m_settingsPath = m_addonPath / "settings.json";
+
+        std::filesystem::create_directories(m_addonPath);
+        Settings::Load(m_settingsPath);
+
+        Services::m_audio = new AudioManager(m_api);
+#ifdef USE_MUMBLE
+        Services::m_mumble = new Services::Gw2MumbleService(m_api);
+#endif
+#ifdef USE_NEXUS_LINK
+        Services::m_nexus = new Services::NexusService(m_api);
+#endif
+#ifdef USE_RTAPI
+        Services::m_rtapi = new Services::RealTimeApiService(m_api);
+#endif
+
+        Services::Local(m_addonPath);
+
+        m_orchestrator = std::make_unique<ScreenOrchestrator>(m_api, hSelf);
+        m_deathMonitor = std::make_unique<DeathMonitor>(m_api);
+        m_settingsUI = std::make_unique<SettingsUI>(m_settingsPath);
+
+        m_deathMonitor->SetCallbacks(
+            [this](int language) { m_orchestrator->TriggerDeath(language); },
+            [this]() { m_orchestrator->StopAll(); }
+        );
+
+        m_settingsUI->SetCallbacks(
+            [this]() { m_orchestrator->TriggerPreview(); },
+            [this]() { m_orchestrator->StopAll(); }
+        );
+
+        m_api->GUI_Register(RT_Render, AddonRender);
+        m_api->GUI_Register(RT_OptionsRender, AddonOptions);
+        m_api->WndProc_Register(WndProc);
     }
 
-    // Dropdown (Combo) Example
-    const char* exampleOptions[] = { "Option A", "Option B", "Option C" };
-    const int exampleOptionsCount = 3;
-
-    // Safety clamp to prevent out-of-bounds access if settings get corrupted
-    if (Settings::ExampleDropdownIndex < 0 || Settings::ExampleDropdownIndex >= exampleOptionsCount) {
-        Settings::ExampleDropdownIndex = 0;
-    }
-    
-    ImGui::AlignTextToFramePadding();
-    ImGui::Text("Example Dropdown:");
-    ImGui::SameLine();
-    ImGui::SetNextItemWidth(150.0f);
-    
-    if (ImGui::BeginCombo("##ExampleDropdown", exampleOptions[Settings::ExampleDropdownIndex]))
+    Addon::~Addon()
     {
-        for (int i = 0; i < exampleOptionsCount; i++)
-        {
-            bool isSelected = (Settings::ExampleDropdownIndex == i);
-            if (ImGui::Selectable(exampleOptions[i], isSelected))
-            {
-                Settings::ExampleDropdownIndex = i;
-                Settings::Save(m_settingsPath);
-            }
-            if (isSelected)
-            {
-                ImGui::SetItemDefaultFocus();
+        m_api->GUI_Deregister(AddonRender);
+        m_api->GUI_Deregister(AddonOptions);
+        m_api->WndProc_Deregister(WndProc);
+
+        m_orchestrator.reset();
+        m_deathMonitor.reset();
+        m_settingsUI.reset();
+
+        delete Services::m_audio;
+        Services::m_audio = nullptr;
+#ifdef USE_MUMBLE
+        delete Services::m_mumble;
+        Services::m_mumble = nullptr;
+#endif
+#ifdef USE_NEXUS_LINK
+        delete Services::m_nexus;
+        Services::m_nexus = nullptr;
+#endif
+#ifdef USE_RTAPI
+        delete Services::m_rtapi;
+        Services::m_rtapi = nullptr;
+#endif
+        delete Services::m_localManager;
+        Services::m_localManager = nullptr;
+        Settings::Save(m_settingsPath);
+        m_instance = nullptr;
+    }
+
+    void Addon::Render()
+    {
+        m_deathMonitor->Update(m_orchestrator->IsPreviewing());
+        m_orchestrator->Render();
+    }
+
+    void Addon::Options()
+    {
+        m_settingsUI->Draw();
+    }
+
+    UINT Addon::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+    {
+        // Allow canceling active fail screen animation by double-clicking anywhere in the game window.
+        if (m_instance && m_instance->m_orchestrator) {
+            if (uMsg == 0x0203) { // WM_LBUTTONDBLCLK
+                if (m_instance->m_orchestrator->IsPlayingAnimation()) {
+                    m_instance->m_orchestrator->StopAll();
+                }
             }
         }
-        ImGui::EndCombo();
+        return uMsg;
     }
 }

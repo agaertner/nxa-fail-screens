@@ -33,18 +33,18 @@ extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
 {
     AddonDef.Signature = ADDON_SIGNATURE;
     AddonDef.APIVersion = NEXUS_API_VERSION;
-    AddonDef.Name = "Addon Template";
+    AddonDef.Name = "Fail Screens";
     AddonDef.Version.Major = V_MAJOR;
     AddonDef.Version.Minor = V_MINOR;
     AddonDef.Version.Build = V_BUILD;
     AddonDef.Version.Revision = V_REVISION;
     AddonDef.Author = "Nekres.1943";
-    AddonDef.Description = "A basic Nexus addon template.";
+    AddonDef.Description = "Allows you to calibrate the amount of emotional damage received upon defeat.";
     AddonDef.Load = AddonLoad;
     AddonDef.Unload = AddonUnload;
     AddonDef.Flags = EAddonFlags::AF_None;
     AddonDef.Provider = EUpdateProvider::UP_GitHub;
-    AddonDef.UpdateLink = "https://github.com/agaertner/nxa-addon-template";
+    AddonDef.UpdateLink = "https://github.com/agaertner/nxa-fail-screens";
     return &AddonDef;
 }
 

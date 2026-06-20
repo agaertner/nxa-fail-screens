@@ -17,7 +17,16 @@
       <UniqueIdentifier>{098e6b0c-f26f-45af-91bc-f2a1befe5738}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\core\services">
-      <UniqueIdentifier>{00c904c5-7a4c-47c3-b28a-e14b2ae003fc}</UniqueIdentifier>
+      <UniqueIdentifier>{12c6a084-2a6d-472e-8d8a-6b2169b22a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\managers">
+      <UniqueIdentifier>{e83b1022-7901-4467-93aa-c0f5f74a9c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\utils">
+      <UniqueIdentifier>{12c6a084-2a6d-472e-8d8a-6b2169b22a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\screens">
+      <UniqueIdentifier>{12c6a084-2a6d-472e-8d8a-6b2169b22a86}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\core\ui">
       <UniqueIdentifier>{e0a13f2d-6dcc-483f-9088-8c0230562ecb}</UniqueIdentifier>
@@ -26,7 +35,16 @@
       <UniqueIdentifier>{70c448de-aa0a-473f-b524-24ba33ef9e57}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\core\services">
-      <UniqueIdentifier>{d6b0d457-10b8-46b4-aabf-1b5b657047f3}</UniqueIdentifier>
+      <UniqueIdentifier>{f3b259d6-3e4b-48cf-9a99-b131df33dbab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\managers">
+      <UniqueIdentifier>{9fb8bba2-58d5-455b-b9d9-f2f2cf54e0c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\utils">
+      <UniqueIdentifier>{f3b259d6-3e4b-48cf-9a99-b131df33dbac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\screens">
+      <UniqueIdentifier>{f3b259d6-3e4b-48cf-9a99-b131df33dbad}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\core\ui">
       <UniqueIdentifier>{adedbdd6-306f-4c03-8756-62a35a130ea3}</UniqueIdentifier>
@@ -34,24 +52,6 @@
     <Filter Include="Header Files\thirdparty">
       <UniqueIdentifier>{23886103-6848-435d-a530-c03ea52bfd27}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\submodules\imgui\imconfig.h">
-      <Filter>Header Files\submodules\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\submodules\imgui\imgui.h">
-      <Filter>Header Files\submodules\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\submodules\imgui\imgui_internal.h">
-      <Filter>Header Files\submodules\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\submodules\imgui\imstb_rectpack.h">
-      <Filter>Header Files\submodules\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\submodules\imgui\imstb_textedit.h">
-      <Filter>Header Files\submodules\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\submodules\imgui\imstb_truetype.h">
-      <Filter>Header Files\submodules\imgui</Filter>
-    </ClInclude>
     <Filter Include="Header Files\thirdparty\nlohmann">
       <UniqueIdentifier>{2c446612-42f5-45e7-9d3f-b164a888e8db}</UniqueIdentifier>
     </Filter>
@@ -84,6 +84,39 @@
     <ClInclude Include="core\Addon.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="core\utils\AsyncTexture.h">
+      <Filter>Header Files\core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="core\utils\AsyncFont.h">
+      <Filter>Header Files\core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="core\screens\FailScreen.h">
+      <Filter>Header Files\core\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="core\screens\DarkSouls.h">
+      <Filter>Header Files\core\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="core\screens\AngryPepe.h">
+      <Filter>Header Files\core\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="core\screens\GrandTheftAuto.h">
+      <Filter>Header Files\core\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="core\screens\RytlocksCritterRampage.h">
+      <Filter>Header Files\core\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="core\screens\Sekiro.h">
+      <Filter>Header Files\core\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="core\screens\WinXp.h">
+      <Filter>Header Files\core\screens</Filter>
+    </ClInclude>
+    <ClInclude Include="core\managers\AudioManager.h">
+      <Filter>Header Files\core\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="core\managers\LocalManager.h">
+      <Filter>Header Files\core\managers</Filter>
+    </ClInclude>
     <ClInclude Include="core\services\NexusService.h">
       <Filter>Header Files\core\services</Filter>
     </ClInclude>
@@ -114,6 +147,24 @@
     <ClInclude Include="thirdparty\nlohmann\json.hpp">
       <Filter>Header Files\thirdparty\nlohmann</Filter>
     </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_rectpack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -125,6 +176,36 @@
     <ClCompile Include="core\Addon.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
+    <ClCompile Include="core\utils\AsyncTexture.cpp">
+      <Filter>Source Files\core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="core\utils\AsyncFont.cpp">
+      <Filter>Source Files\core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="core\screens\DarkSouls.cpp">
+      <Filter>Source Files\core\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="core\screens\AngryPepe.cpp">
+      <Filter>Source Files\core\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="core\screens\GrandTheftAuto.cpp">
+      <Filter>Source Files\core\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="core\screens\RytlocksCritterRampage.cpp">
+      <Filter>Source Files\core\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="core\screens\Sekiro.cpp">
+      <Filter>Source Files\core\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="core\screens\WinXp.cpp">
+      <Filter>Source Files\core\screens</Filter>
+    </ClCompile>
+    <ClCompile Include="core\managers\AudioManager.cpp">
+      <Filter>Source Files\core\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\managers\LocalManager.cpp">
+      <Filter>Source Files\core\managers</Filter>
+    </ClCompile>
     <ClCompile Include="core\services\Gw2MumbleService.cpp">
       <Filter>Source Files\core\services</Filter>
     </ClCompile>
@@ -135,19 +216,24 @@
       <Filter>Source Files\core\services</Filter>
     </ClCompile>
     <ClCompile Include="..\submodules\imgui\imgui.cpp">
-      <Filter>Source Files\submodules\imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\submodules\imgui\imgui_demo.cpp">
-      <Filter>Source Files\submodules\imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\submodules\imgui\imgui_draw.cpp">
-      <Filter>Source Files\submodules\imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\submodules\imgui\imgui_tables.cpp">
-      <Filter>Source Files\submodules\imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\submodules\imgui\imgui_widgets.cpp">
-      <Filter>Source Files\submodules\imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
