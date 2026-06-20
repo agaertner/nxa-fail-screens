@@ -48,6 +48,7 @@ namespace Nekres {
         IXAudio2* m_pXAudio2;
         IXAudio2MasteringVoice* m_pMasterVoice;
         bool m_initialized;
+        bool m_coInitialized;
         std::mutex m_mutex;
         
         std::unordered_map<int, AudioCacheEntry> m_cache;

@@ -17,6 +17,8 @@ namespace Nekres {
         // Returns the ImFont* if it has been loaded and initialized
         void* Get();
 
+        static void ClearAll(AddonAPI_t* api);
+
     private:
         std::string m_identifier;
         int m_resourceID;

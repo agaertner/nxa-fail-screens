@@ -22,8 +22,9 @@ namespace Nekres {
         return hModule;
     }
 
-    AudioManager::AudioManager(AddonAPI_t* api) : m_api(api), m_pXAudio2(nullptr), m_pMasterVoice(nullptr), m_initialized(false) {
-        CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+    AudioManager::AudioManager(AddonAPI_t* api) : m_api(api), m_pXAudio2(nullptr), m_pMasterVoice(nullptr), m_initialized(false), m_coInitialized(false) {
+        HRESULT hrInit = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+        m_coInitialized = SUCCEEDED(hrInit);
         
         HRESULT hr = XAudio2Create(&m_pXAudio2, 0, XAUDIO2_DEFAULT_PROCESSOR);
         if (FAILED(hr)) return;
@@ -48,7 +49,9 @@ namespace Nekres {
             m_pXAudio2->Release();
             m_pXAudio2 = nullptr;
         }
-        CoUninitialize();
+        if (m_coInitialized) {
+            CoUninitialize();
+        }
     }
 
     bool AudioManager::FindChunk(const BYTE* data, size_t size, DWORD fourcc, DWORD& chunkSize, DWORD& chunkDataPosition) {

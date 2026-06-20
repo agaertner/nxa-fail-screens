@@ -70,6 +70,8 @@ namespace Nekres {
         m_deathMonitor.reset();
         m_settingsUI.reset();
 
+        FailScreen::ClearResources(m_api);
+
         delete Services::m_audio;
         Services::m_audio = nullptr;
 #ifdef USE_MUMBLE

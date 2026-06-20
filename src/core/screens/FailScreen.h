@@ -89,6 +89,12 @@ namespace Nekres {
             EnsureFont("FontConsola_16", IDR_FONT_CONSOLA, 16.0f, api, hSelf);
             EnsureFont("FontAthelas_Native250", IDR_FONT_ATHELAS, 250.0f, api, hSelf);
         }
+
+        static void ClearResources(AddonAPI_t* api) {
+            AsyncFont::ClearAll(api);
+            s_fonts.clear();
+            s_textures.clear();
+        }
     };
 
 }

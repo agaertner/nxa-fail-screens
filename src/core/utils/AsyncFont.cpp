@@ -52,4 +52,11 @@ namespace Nekres {
         return nullptr;
     }
 
+    void AsyncFont::ClearAll(AddonAPI_t* api) {
+        for (auto const& pair : s_loadedFonts) {
+            api->Fonts_Release(pair.first.c_str(), FontReceiveCallback);
+        }
+        s_loadedFonts.clear();
+    }
+
 }
