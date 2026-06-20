@@ -17,7 +17,7 @@ namespace Nekres {
     {
         if (!Services::m_rtapi) return;
         
-        RealTimeData* rtData = (RealTimeData*)m_api->DataLink_Get(DL_RTAPI);
+        RealTimeData* rtData = Services::m_rtapi->Data();
         if (!rtData) return;
         
         if (rtData->MapID != m_lastMapId || rtData->GameState != m_lastGameState) {
