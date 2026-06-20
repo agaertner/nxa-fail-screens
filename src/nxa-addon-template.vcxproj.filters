@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{098e6b0c-f26f-45af-91bc-f2a1befe5738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\services">
+      <UniqueIdentifier>{00c904c5-7a4c-47c3-b28a-e14b2ae003fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\ui">
+      <UniqueIdentifier>{e0a13f2d-6dcc-483f-9088-8c0230562ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{70c448de-aa0a-473f-b524-24ba33ef9e57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\services">
+      <UniqueIdentifier>{d6b0d457-10b8-46b4-aabf-1b5b657047f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\ui">
+      <UniqueIdentifier>{adedbdd6-306f-4c03-8756-62a35a130ea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\thirdparty">
+      <UniqueIdentifier>{23886103-6848-435d-a530-c03ea52bfd27}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\submodules\imgui\imconfig.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imgui.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imgui_internal.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_rectpack.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_textedit.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_truetype.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <Filter Include="Header Files\thirdparty\nlohmann">
+      <UniqueIdentifier>{2c446612-42f5-45e7-9d3f-b164a888e8db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\submodules">
+      <UniqueIdentifier>{05858bcc-7408-4b93-a8c5-8946d6167c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\submodules\nexus-core">
+      <UniqueIdentifier>{d57ddc21-428d-4cf5-acfc-efe7308db702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\submodules\nexus-mumble">
+      <UniqueIdentifier>{9927411b-999c-4aeb-9cdd-ebd151b9c79a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Settings.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\nexus-core\Nexus.h">
+      <Filter>Header Files\submodules\nexus-core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\nexus-mumble\Mumble.h">
+      <Filter>Header Files\submodules\nexus-mumble</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Addon.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\services\NexusService.h">
+      <Filter>Header Files\core\services</Filter>
+    </ClInclude>
+    <ClInclude Include="core\services\Gw2MumbleService.h">
+      <Filter>Header Files\core\services</Filter>
+    </ClInclude>
+    <ClInclude Include="core\services\RealTimeApiService.h">
+      <Filter>Header Files\core\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imconfig.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imgui.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imgui_internal.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_rectpack.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_textedit.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\submodules\imgui\imstb_truetype.h">
+      <Filter>Header Files\submodules\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\nlohmann\json.hpp">
+      <Filter>Header Files\thirdparty\nlohmann</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Settings.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Addon.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\services\Gw2MumbleService.cpp">
+      <Filter>Source Files\core\services</Filter>
+    </ClCompile>
+    <ClCompile Include="core\services\NexusService.cpp">
+      <Filter>Source Files\core\services</Filter>
+    </ClCompile>
+    <ClCompile Include="core\services\RealTimeApiService.cpp">
+      <Filter>Source Files\core\services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\imgui\imgui.cpp">
+      <Filter>Source Files\submodules\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\imgui\imgui_demo.cpp">
+      <Filter>Source Files\submodules\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\imgui\imgui_draw.cpp">
+      <Filter>Source Files\submodules\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\imgui\imgui_tables.cpp">
+      <Filter>Source Files\submodules\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\submodules\imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
