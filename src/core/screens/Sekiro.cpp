@@ -1,5 +1,5 @@
 #include "Sekiro.h"
-#include "../../resource.h"
+
 #include <cstdlib>
 
 namespace Nekres {
@@ -32,18 +32,16 @@ namespace Nekres {
 
     void Sekiro::OnDeath(int language)
     {
-        EnsureTexture("TexSekiro", IDR_TEX_SEKIRO);
-        EnsureTexture("TexSekiroOut", IDR_TEX_SEKIRO_OUT);
-        EnsureFont("FontAthelas_Native250", IDR_FONT_ATHELAS, 250.0f, m_api, m_hSelf);
+        NexusSDK::Content->GetFont(IDR_FONT_ATHELAS, 250.0f);
 
-        std::string deathStr = Services::Local()->GetString("Sekiro_Death", language);
+        std::string deathStr = NexusSDK::Local->GetString("Sekiro_Death", language);
 
         int rnd = rand() % 3;
         if (rnd == 0) m_text = deathStr;
         else if (rnd == 1) m_text = "Y E E T";
         else m_text = "L M A O O O O O";
 
-        PlaySoundEffect(IDR_WAV_SEKIRO);
+        PlaySoundEffect(IDR_SFX_SEKIRO);
     }
 
     bool Sekiro::DrawContent(ImDrawList* drawList, float timeSinceDeath, ImVec2 screenSize, float finalScale)
@@ -65,9 +63,9 @@ namespace Nekres {
 
         drawList->AddRectFilled(ImVec2(0, 0), screenSize, bgCol32);
 
-        Texture_t* kanjiTex = GetTexture("TexSekiro");
-        Texture_t* kanjiShadowTex = GetTexture("TexSekiroOut");
-        ImFont* font = GetFont("FontAthelas_Native250");
+        Texture_t* kanjiTex = NexusSDK::Content->GetTexture(IDB_TEX_SEKIRO);
+        Texture_t* kanjiShadowTex = NexusSDK::Content->GetTexture(IDB_TEX_SEKIRO_OUT);
+        ImFont* font = NexusSDK::Content->GetFont(IDR_FONT_ATHELAS, 250.0f);
 
         // Measure text height so kanji can be offset upward
         float textHeight = 0.0f;

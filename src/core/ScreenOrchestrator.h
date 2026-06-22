@@ -5,7 +5,7 @@
 #include <vector>
 #include "../Defines.h"
 #include "screens/FailScreen.h"
-#include "utils/AsyncFont.h"
+#include <lib-nxa-sdk/NexusSDK.h>
 
 namespace Nekres {
     class ScreenOrchestrator {
@@ -27,7 +27,7 @@ namespace Nekres {
         HMODULE m_hSelf;
 
         std::unique_ptr<FailScreen> m_activeScreen;
-        std::vector<std::unique_ptr<AsyncFont>> m_preloadedFonts;
+        std::vector<std::unique_ptr<NexusSDK::AsyncFont>> m_preloadedFonts;
 
         bool m_isPlayingAnimation = false;
         bool m_isPreviewing = false;

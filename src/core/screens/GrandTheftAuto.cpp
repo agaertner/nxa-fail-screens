@@ -1,5 +1,5 @@
 #include "GrandTheftAuto.h"
-#include "../../resource.h"
+
 
 namespace Nekres {
 
@@ -35,20 +35,17 @@ namespace Nekres {
 
     void GrandTheftAuto::OnDeath(int language)
     {
-        int resourceID = IDR_TEX_GTA_EN;
-        m_texId = "TexGTA_EN";
+        m_resourceID = IDB_TEX_GTA_EN;
         switch (language) {
-            case 2: resourceID = IDR_TEX_GTA_FR; m_texId = "TexGTA_FR"; break;
-            case 3: resourceID = IDR_TEX_GTA_DE; m_texId = "TexGTA_DE"; break;
-            case 4: resourceID = IDR_TEX_GTA_ES; m_texId = "TexGTA_ES"; break;
+            case 2: m_resourceID = IDB_TEX_GTA_FR; break;
+            case 3: m_resourceID = IDB_TEX_GTA_DE; break;
+            case 4: m_resourceID = IDB_TEX_GTA_ES; break;
             default: break;
         }
 
-        EnsureTexture(m_texId, resourceID);
-        EnsureTexture("TexGTAPhoto", IDR_TEX_GTA_PHOTO);
-        EnsureTexture("TexGTAFlash", IDR_TEX_GTA_FLASH);
 
-        PlaySoundEffect(IDR_WAV_GTA);
+
+        PlaySoundEffect(IDR_SFX_GTA);
     }
 
     bool GrandTheftAuto::DrawContent(ImDrawList* drawList, float timeSinceDeath, ImVec2 screenSize, float finalScale)
@@ -73,21 +70,21 @@ namespace Nekres {
         drawList->AddRectFilled(p_min, p_max, bgCol32);
 
         // Draw photo vignette
-        Texture_t* photoTex = GetTexture("TexGTAPhoto");
+        Texture_t* photoTex = NexusSDK::Content->GetTexture(IDB_TEX_GTA_PHOTO);
         if (photoTex && photoTex->Resource && photoOpacity > 0.001f) {
             ImU32 photoCol = ImGui::GetColorU32(ImVec4(tr, tg, tb, photoOpacity));
             drawList->AddImage((void*)photoTex->Resource, p_min, p_max, ImVec2(0,0), ImVec2(1,1), photoCol);
         }
 
         // Draw flash vignette
-        Texture_t* flashTex = GetTexture("TexGTAFlash");
+        Texture_t* flashTex = NexusSDK::Content->GetTexture(IDB_TEX_GTA_FLASH);
         if (flashTex && flashTex->Resource && flashOpacity > 0.001f) {
             ImU32 flashCol = ImGui::GetColorU32(ImVec4(tr, tg, tb, flashOpacity));
             drawList->AddImage((void*)flashTex->Resource, p_min, p_max, ImVec2(0,0), ImVec2(1,1), flashCol);
         }
 
         // Draw wasted text at 1.2x scale, adjusted by UI scale
-        Texture_t* wastedTex = GetTexture(m_texId);
+        Texture_t* wastedTex = NexusSDK::Content->GetTexture(m_resourceID);
         if (wastedTex && wastedTex->Resource && textOpacity > 0.001f) {
             float w = wastedTex->Width * 1.2f * finalScale;
             float h = wastedTex->Height * 1.2f * finalScale;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -161,8 +161,10 @@
     <ClInclude Include="core\ScreenOrchestrator.h" />
     <ClInclude Include="core\SettingsUI.h" />
     <ClInclude Include="core\Addon.h" />
-    <ClInclude Include="core\utils\AsyncTexture.h" />
-    <ClInclude Include="core\utils\AsyncFont.h" />
+    <ClInclude Include="core\ui\Footer.h" />
+    <ClInclude Include="core\ui\Theme.h" />
+    <ClInclude Include="core\ui\pages\GeneralSettingsPage.h" />
+    <ClInclude Include="core\ui\pages\AudioSettingsPage.h" />
     <ClInclude Include="core\screens\FailScreen.h" />
     <ClInclude Include="core\screens\DarkSouls.h" />
     <ClInclude Include="core\screens\AngryPepe.h" />
@@ -173,10 +175,9 @@
     <ClInclude Include="core\services\Gw2MumbleService.h" />
     <ClInclude Include="core\services\RealTimeApiService.h" />
     <ClInclude Include="core\services\NexusService.h" />
-    <ClInclude Include="core\managers\AudioManager.h" />
-    <ClInclude Include="core\managers\LocalManager.h" />
     <ClInclude Include="..\submodules\nexus-mumble\Mumble.h" />
     <ClInclude Include="..\submodules\nexus-core\Nexus.h" />
+    <ClInclude Include="..\submodules\lib-nxa-sdk\src\managers\ContentManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="core\Settings.h" />
     <ClInclude Include="..\submodules\imgui\imconfig.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="..\submodules\imgui\imstb_truetype.h" />
     <ClInclude Include="thirdparty\nlohmann\json.hpp" />
     <ClInclude Include="Version.h" />
+    <ClInclude Include="..\submodules\lib-nxa-sdk\src\ui\controls\StandardDialog.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\DeathMonitor.cpp" />
@@ -194,8 +196,9 @@
     <ClCompile Include="core\SettingsUI.cpp" />
     <ClCompile Include="core\screens\FailScreen.cpp" />
     <ClCompile Include="core\Addon.cpp" />
-    <ClCompile Include="core\utils\AsyncTexture.cpp" />
-    <ClCompile Include="core\utils\AsyncFont.cpp" />
+    <ClCompile Include="core\ui\Footer.cpp" />
+    <ClCompile Include="core\ui\pages\GeneralSettingsPage.cpp" />
+    <ClCompile Include="core\ui\pages\AudioSettingsPage.cpp" />
     <ClCompile Include="core\screens\DarkSouls.cpp" />
     <ClCompile Include="core\screens\AngryPepe.cpp" />
     <ClCompile Include="core\screens\GrandTheftAuto.cpp" />
@@ -205,8 +208,6 @@
     <ClCompile Include="core\services\Gw2MumbleService.cpp" />
     <ClCompile Include="core\services\RealTimeApiService.cpp" />
     <ClCompile Include="core\services\NexusService.cpp" />
-    <ClCompile Include="core\managers\AudioManager.cpp" />
-    <ClCompile Include="core\managers\LocalManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="core\Settings.cpp" />
     <ClCompile Include="..\submodules\imgui\imgui.cpp" />
@@ -214,6 +215,18 @@
     <ClCompile Include="..\submodules\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\submodules\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\submodules\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\managers\AudioManager.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\managers\ContentManager.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\managers\LocalManager.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Checkbox.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Button.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Menu.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Dropdown.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Label.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Slider.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\utils\AsyncFont.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\utils\AsyncTexture.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\StandardDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

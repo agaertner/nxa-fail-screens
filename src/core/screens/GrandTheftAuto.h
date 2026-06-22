@@ -19,7 +19,7 @@ namespace Nekres {
         AnimationCurve m_flashOpacityCurve;
         AnimationCurve m_textOpacityCurve;
 
-        std::string m_texId;
+        std::string m_resourceID;
     };
 }
 

@@ -33,7 +33,9 @@ namespace Settings
     extern bool EnableSekiro;
     extern bool EnableWinXp;
 
-    extern float Volume;
+    extern float MasterVolume;
+    extern float UIVolume;
+    extern float ScreenVolume;
 }
 
 #endif

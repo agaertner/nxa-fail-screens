@@ -1,5 +1,5 @@
 #include "RytlocksCritterRampage.h"
-#include "../../resource.h"
+
 
 namespace Nekres {
 
@@ -21,10 +21,9 @@ namespace Nekres {
 
     void RytlocksCritterRampage::OnDeath(int language)
     {
-        EnsureTexture("TexRytlock0", IDR_TEX_RYTLOCK_0);
-        EnsureTexture("TexRytlock1", IDR_TEX_RYTLOCK_1);
 
-        PlaySoundEffect(IDR_WAV_RYTLOCK);
+
+        PlaySoundEffect(IDR_SFX_RYTLOCK);
     }
 
     bool RytlocksCritterRampage::DrawContent(ImDrawList* drawList, float timeSinceDeath, ImVec2 screenSize, float finalScale)
@@ -48,7 +47,7 @@ namespace Nekres {
         int row = currentFrame / 2;
 
         // Only using sheet 0 as in the original (sheets 1-5 are commented out)
-        Texture_t* sheet = GetTexture("TexRytlock0");
+        Texture_t* sheet = NexusSDK::Content->GetTexture(IDB_TEX_RYTLOCK_0);
 
         if (sheet && sheet->Resource) {
             float cellWidth = 190.0f;

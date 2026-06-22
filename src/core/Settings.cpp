@@ -32,7 +32,11 @@ namespace Settings
             if (j.contains("EnableAngryPepe")) EnableAngryPepe = j["EnableAngryPepe"].get<bool>();
             if (j.contains("EnableSekiro")) EnableSekiro = j["EnableSekiro"].get<bool>();
             if (j.contains("EnableWinXp")) EnableWinXp = j["EnableWinXp"].get<bool>();
-            if (j.contains("Volume")) Volume = j["Volume"].get<float>();    file.close();
+            if (j.contains("MasterVolume")) MasterVolume = j["MasterVolume"].get<float>();
+            else if (j.contains("Volume")) MasterVolume = j["Volume"].get<float>(); // Fallback to old key
+            if (j.contains("UIVolume")) UIVolume = j["UIVolume"].get<float>();
+            if (j.contains("ScreenVolume")) ScreenVolume = j["ScreenVolume"].get<float>();
+            file.close();
             }
             catch (json::parse_error& ex)
             {
@@ -59,7 +63,9 @@ namespace Settings
         j["EnableAngryPepe"] = EnableAngryPepe;
         j["EnableSekiro"] = EnableSekiro;
         j["EnableWinXp"] = EnableWinXp;
-        j["Volume"] = std::round((double)Volume * 1000.0) / 1000.0;
+        j["MasterVolume"] = std::round((double)MasterVolume * 1000.0) / 1000.0;
+        j["UIVolume"] = std::round((double)UIVolume * 1000.0) / 1000.0;
+        j["ScreenVolume"] = std::round((double)ScreenVolume * 1000.0) / 1000.0;
 
             std::ofstream file(aPath);
             file << j.dump(1, '\t') << std::endl;
@@ -81,5 +87,7 @@ namespace Settings
     bool EnableSekiro = true;
     bool EnableWinXp = true;
 
-    float Volume = 0.5f;
+    float MasterVolume = 1.0f;
+    float UIVolume = 0.8f;
+    float ScreenVolume = 0.5f;
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -84,11 +84,17 @@
     <ClInclude Include="core\Addon.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="core\utils\AsyncTexture.h">
-      <Filter>Header Files\core\utils</Filter>
+    <ClInclude Include="core\ui\Footer.h">
+      <Filter>Header Files\core\ui</Filter>
     </ClInclude>
-    <ClInclude Include="core\utils\AsyncFont.h">
-      <Filter>Header Files\core\utils</Filter>
+    <ClInclude Include="core\ui\Theme.h">
+      <Filter>Header Files\core\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ui\pages\GeneralSettingsPage.h">
+      <Filter>Header Files\core\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ui\pages\AudioSettingsPage.h">
+      <Filter>Header Files\core\ui</Filter>
     </ClInclude>
     <ClInclude Include="core\screens\FailScreen.h">
       <Filter>Header Files\core\screens</Filter>
@@ -110,12 +116,6 @@
     </ClInclude>
     <ClInclude Include="core\screens\WinXp.h">
       <Filter>Header Files\core\screens</Filter>
-    </ClInclude>
-    <ClInclude Include="core\managers\AudioManager.h">
-      <Filter>Header Files\core\managers</Filter>
-    </ClInclude>
-    <ClInclude Include="core\managers\LocalManager.h">
-      <Filter>Header Files\core\managers</Filter>
     </ClInclude>
     <ClInclude Include="core\services\NexusService.h">
       <Filter>Header Files\core\services</Filter>
@@ -165,6 +165,7 @@
     <ClInclude Include="..\submodules\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\submodules\lib-nxa-sdk\src\ui\controls\StandardDialog.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -176,11 +177,14 @@
     <ClCompile Include="core\Addon.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="core\utils\AsyncTexture.cpp">
-      <Filter>Source Files\core\utils</Filter>
+    <ClCompile Include="core\ui\Footer.cpp">
+      <Filter>Source Files\core\ui</Filter>
     </ClCompile>
-    <ClCompile Include="core\utils\AsyncFont.cpp">
-      <Filter>Source Files\core\utils</Filter>
+    <ClCompile Include="core\ui\pages\GeneralSettingsPage.cpp">
+      <Filter>Source Files\core\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="core\ui\pages\AudioSettingsPage.cpp">
+      <Filter>Source Files\core\ui</Filter>
     </ClCompile>
     <ClCompile Include="core\screens\DarkSouls.cpp">
       <Filter>Source Files\core\screens</Filter>
@@ -199,12 +203,6 @@
     </ClCompile>
     <ClCompile Include="core\screens\WinXp.cpp">
       <Filter>Source Files\core\screens</Filter>
-    </ClCompile>
-    <ClCompile Include="core\managers\AudioManager.cpp">
-      <Filter>Source Files\core\managers</Filter>
-    </ClCompile>
-    <ClCompile Include="core\managers\LocalManager.cpp">
-      <Filter>Source Files\core\managers</Filter>
     </ClCompile>
     <ClCompile Include="core\services\Gw2MumbleService.cpp">
       <Filter>Source Files\core\services</Filter>
@@ -230,6 +228,34 @@
     <ClCompile Include="..\submodules\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\managers\AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\managers\LocalManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\UIContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Checkbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Dropdown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Slider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\utils\AsyncFont.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\utils\AsyncTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\StandardDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">

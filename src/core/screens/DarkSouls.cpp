@@ -1,5 +1,5 @@
 #include "DarkSouls.h"
-#include "../../resource.h"
+
 
 namespace Nekres {
 
@@ -25,17 +25,16 @@ namespace Nekres {
 
     void DarkSouls::OnDeath(int language)
     {
-        int resourceID = IDR_TEX_DARKSOULS_EN;
-        m_texId = "TexDarkSouls_EN";
+        m_resourceID = IDB_TEX_DARKSOULS_EN;
         switch (language) {
-            case 2: resourceID = IDR_TEX_DARKSOULS_FR; m_texId = "TexDarkSouls_FR"; break;
-            case 3: resourceID = IDR_TEX_DARKSOULS_DE; m_texId = "TexDarkSouls_DE"; break;
-            case 4: resourceID = IDR_TEX_DARKSOULS_ES; m_texId = "TexDarkSouls_ES"; break;
+            case 2: m_resourceID = IDB_TEX_DARKSOULS_FR; break;
+            case 3: m_resourceID = IDB_TEX_DARKSOULS_DE; break;
+            case 4: m_resourceID = IDB_TEX_DARKSOULS_ES; break;
             default: break;
         }
         
-        EnsureTexture(m_texId, resourceID);
-        PlaySoundEffect(IDR_WAV_DARKSOULS);
+
+        PlaySoundEffect(IDR_SFX_DARKSOULS);
     }
 
     bool DarkSouls::DrawContent(ImDrawList* drawList, float timeSinceDeath, ImVec2 screenSize, float finalScale)
@@ -55,7 +54,7 @@ namespace Nekres {
         drawList->AddRectFilled(ImVec2(0, 0), screenSize, bgCol32);
 
         // Draw text texture
-        Texture_t* tex = GetTexture(m_texId);
+        Texture_t* tex = NexusSDK::Content->GetTexture(m_resourceID);
         if (tex && tex->Resource) {
             float w = tex->Width * textScale;
             float h = tex->Height * textScale;

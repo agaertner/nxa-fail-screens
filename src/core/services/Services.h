@@ -13,8 +13,7 @@
 #endif
 
 #include "NexusService.h"
-#include "../managers/AudioManager.h"
-#include "../managers/LocalManager.h"
+#include <lib-nxa-sdk/NexusSDK.h>
 
 namespace Nekres::Services
 {
@@ -44,22 +43,6 @@ namespace Nekres::Services
         if (!m_nexus && api)
             m_nexus = new NexusService(api);
         return m_nexus;
-    }
-
-    inline AudioManager* m_audio = nullptr;
-    inline AudioManager* Audio(AddonAPI_t* api = nullptr)
-    {
-        if (!m_audio && api)
-            m_audio = new AudioManager(api);
-        return m_audio;
-    }
-
-    inline LocalManager* m_localManager = nullptr;
-    inline LocalManager* Local(const std::filesystem::path& addonPath = "")
-    {
-        if (!m_localManager && !addonPath.empty())
-            m_localManager = new LocalManager(addonPath);
-        return m_localManager;
     }
 
     inline float cachedUiScale = 1.0f;

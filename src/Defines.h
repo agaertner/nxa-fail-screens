@@ -1,3 +1,4 @@
+#include "resource.h"
 #pragma once
 
 #include "nexus-core/Nexus.h"

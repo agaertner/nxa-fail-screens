@@ -1,5 +1,5 @@
 #include "WinXp.h"
-#include "../../resource.h"
+
 #include <cstdlib>
 
 namespace Nekres {
@@ -21,11 +21,10 @@ namespace Nekres {
     void WinXp::OnDeath(int language)
     {
         m_language = language;
-        EnsureTexture("TexWinXp", IDR_TEX_WINXP);
-        // Load fonts at their native sizes to prevent downscaling aliasing
-        EnsureFont("FontConsola_40", IDR_FONT_CONSOLA, 40.0f, m_api, m_hSelf);
-        EnsureFont("FontConsola_20", IDR_FONT_CONSOLA, 20.0f, m_api, m_hSelf);
-        EnsureFont("FontConsola_16", IDR_FONT_CONSOLA, 16.0f, m_api, m_hSelf);
+
+        NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 40.0f);
+        NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 20.0f);
+        NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 16.0f);
         
         m_windows.clear();
         m_hideBoxes = false;
@@ -52,13 +51,13 @@ namespace Nekres {
                 w.OffsetY = (float)((rand() % 1001) - 500) * finalScale;
                 m_windows.push_back(w);
 
-                PlaySoundEffect(IDR_WAV_WINXP);
+                PlaySoundEffect(IDR_SFX_WINXP);
             }
         }
 
         if (timeSinceDeath >= 2.65f) {
             if (!m_playedFinalSound) {
-                PlaySoundEffect(IDR_WAV_WINXP);
+                PlaySoundEffect(IDR_SFX_WINXP);
                 m_playedFinalSound = true;
             }
             m_hideBoxes = true;
@@ -66,8 +65,8 @@ namespace Nekres {
 
         m_blueScreenOpacity = m_blueScreenCurve.Evaluate(timeSinceDeath);
 
-        Texture_t* errorTex = GetTexture("TexWinXp");
-        ImFont* boxFont = GetFont("FontConsola_16");
+        Texture_t* errorTex = NexusSDK::Content->GetTexture(IDB_TEX_WINXP);
+        ImFont* boxFont = NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 16.0f);
 
         // Draw error boxes scaled by UI scale
         if (!m_hideBoxes && errorTex && errorTex->Resource) {
@@ -77,8 +76,9 @@ namespace Nekres {
             ImU32 titleCol = ImGui::GetColorU32(ImVec4(1,1,1,1));
             ImU32 textCol = ImGui::GetColorU32(ImVec4(0,0,0,1));
 
-            std::string strError = Services::Local()->GetString("WinXP_Error", m_language);
-            std::string strFail = Services::Local()->GetString("WinXP_Fail", m_language);
+            std::string strError = NexusSDK::Local->GetString("WinXP_Error", m_language);
+            std::string strFail = NexusSDK::Local->GetString("WinXP_Fail", m_language);
+            // ... wait, I will use multiple chunks instead of true AllowMultiple across big file so I don't break things
 
             for (const auto& win : m_windows) {
                 float x = (screenSize.x - w) * 0.5f + win.OffsetX;
@@ -100,8 +100,8 @@ namespace Nekres {
 
             ImU32 whiteCol = ImGui::GetColorU32(ImVec4(1.0f, 1.0f, 1.0f, m_blueScreenOpacity));
 
-            ImFont* descFont = GetFont("FontConsola_40");
-            ImFont* infoFont = GetFont("FontConsola_20");
+            ImFont* descFont = NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 40.0f);
+            ImFont* infoFont = NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 20.0f);
 
             if (descFont && infoFont) {
                 float descX = screenSize.x * 0.15f;
@@ -113,18 +113,18 @@ namespace Nekres {
                 // Reuse the 40px font and scale it up for the sad face to save massive amounts of atlas space
                 drawList->AddText(descFont, 250.0f * finalScale, ImVec2(smileX, smileY), whiteCol, ":(");
                 
-                std::string yourCharacter = Services::Local()->GetString("WinXP_YourCharacter", m_language);
+                std::string yourCharacter = NexusSDK::Local->GetString("WinXP_YourCharacter", m_language);
 
                 std::string charName = (Services::m_mumble && Services::m_mumble->Identity()) ? Services::m_mumble->Identity()->Name : yourCharacter;
                 if (charName.empty()) charName = yourCharacter;
 
-                std::string desc = Services::Local()->GetString("WinXP_Desc", m_language);
+                std::string desc = NexusSDK::Local->GetString("WinXP_Desc", m_language);
                 size_t pos = desc.find("{0}");
                 if (pos != std::string::npos) {
                     desc.replace(pos, 3, charName);
                 }
 
-                std::string infoStr = Services::Local()->GetString("WinXP_Info", m_language);
+                std::string infoStr = NexusSDK::Local->GetString("WinXP_Info", m_language);
                 
                 ImVec2 descPos = ImVec2(descX, descY);
                 drawList->AddText(descFont, 40.0f * finalScale, descPos, whiteCol, desc.c_str());

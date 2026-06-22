@@ -1,5 +1,5 @@
 #include "AngryPepe.h"
-#include "../../resource.h"
+
 #include <cstdlib>
 
 namespace Nekres {
@@ -14,8 +14,8 @@ namespace Nekres {
 
     void AngryPepe::OnDeath(int language)
     {
-        EnsureTexture("TexAngryPepe", IDR_TEX_ANGRYPEPE);
-        PlaySoundEffect(IDR_WAV_ANGRYPEPE);
+
+        PlaySoundEffect(IDR_SFX_ANGRYPEPE);
     }
 
     bool AngryPepe::DrawContent(ImDrawList* drawList, float timeSinceDeath, ImVec2 screenSize, float finalScale)
@@ -26,7 +26,7 @@ namespace Nekres {
 
         float rage = m_rageCurve.Evaluate(timeSinceDeath);
 
-        Texture_t* pepeTex = GetTexture("TexAngryPepe");
+        Texture_t* pepeTex = NexusSDK::Content->GetTexture(IDB_TEX_ANGRYPEPE);
 
         // Draw pepe first, then red foreground overlay on top
         if (pepeTex && pepeTex->Resource) {

@@ -1,0 +1,75 @@
+{
+    "Screen_DarkSouls": {
+        "en": "Dark Souls"
+    },
+    "Screen_GrandTheftAuto": {
+        "en": "Grand Theft Auto"
+    },
+    "Screen_RytlocksCritterRampage": {
+        "en": "Rytlock's Critter Rampage"
+    },
+    "Screen_AngryPepe": {
+        "en": "Angry Pepe"
+    },
+    "Screen_Sekiro": {
+        "en": "Sekiro"
+    },
+    "Screen_WinXP": {
+        "en": "Win XP"
+    },
+    "Settings_DefeatedScreen": {
+        "en": "Defeated Screen:",
+        "de": "Besiegt Bildschirm:",
+        "fr": "Écran Défaite:"
+    },
+    "Settings_Randomize": {
+        "en": "Randomize",
+        "de": "Zufälliger Bildschirm"
+    },
+    "Settings_IncludeInRandomizer": {
+        "en": "Include in Randomizer:",
+        "de": "Im Zufallsgenerator einschließen:"
+    },
+    "Settings_MasterVolume": {
+        "en": "Master Volume:",
+        "de": "Hauptlautstärke:",
+        "fr": "Volume Principal:"
+    },
+    "Settings_UIVolume": {
+        "en": "UI Volume:"
+    },
+    "Settings_ScreenVolume": {
+        "en": "Defeated Screen Volume:"
+    },
+    "Settings_Preview": {
+        "en": "Preview",
+        "de": "Vorschau",
+        "fr": "Aperçu"
+    },
+    "WinXP_Error": {
+        "en": "Error",
+        "de": "Fehler"
+    },
+    "WinXP_Fail": {
+        "en": "Fail",
+        "de": "Versagt"
+    },
+    "WinXP_Desc": {
+        "en": "{0} ran into a problem and needs to revive.\nWe're just collecting some tears, and then\nwe'll grief with you.",
+        "de": "{0} ist auf ein Problem gestoßen und muss wiederbelebt werden.\nWir sammeln nur ein paar Tränen, und dann\nwerden wir mit dir trauern."
+    },
+    "WinXP_Info": {
+        "en": "For more information about this issue and possible fixes,\nbother your party leader.",
+        "de": "Für weitere Informationen über dieses Problem und mögliche Lösungen,\nnerv deinen Gruppenleiter."
+    },
+    "WinXP_YourCharacter": {
+        "en": "Your character",
+        "de": "Dein Charakter"
+    },
+    "Sekiro_Death": {
+        "en": "D E A T H",
+        "fr": "M O R T",
+        "de": "T O D",
+        "es": "M U E R T E"
+    }
+}

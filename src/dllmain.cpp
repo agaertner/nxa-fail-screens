@@ -1,5 +1,5 @@
 #include <Windows.h>
-//#include "resource.h"
+//
 #include "Version.h"
 #include "Signature.h"
 #include "core/Addon.h"

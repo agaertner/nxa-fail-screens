@@ -9,9 +9,9 @@
 #include "screens/AngryPepe.h"
 #include "screens/Sekiro.h"
 #include "screens/WinXp.h"
-#include "utils/AsyncFont.h"
+#include <lib-nxa-sdk/NexusSDK.h>
 #include "services/Services.h"
-#include "../resource.h"
+
 
 namespace Nekres {
 
@@ -24,7 +24,10 @@ namespace Nekres {
     {
         static bool s_fontsLoaded = false;
         if (!s_fontsLoaded) {
-            FailScreen::PreloadFonts(m_api, m_hSelf);
+            NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 40.0f);
+            NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 20.0f);
+            NexusSDK::Content->GetFont(IDR_FONT_CONSOLA, 16.0f);
+            NexusSDK::Content->GetFont(IDR_FONT_ATHELAS, 250.0f);
             s_fontsLoaded = true;
         }
 

@@ -18,7 +18,7 @@ namespace Nekres {
         AnimationCurve m_textOpacityCurve;
         AnimationCurve m_textScaleCurve;
 
-        std::string m_texId;
+        std::string m_resourceID;
     };
 }
 

@@ -1,44 +1,38 @@
-#ifndef RESOURCE_H
-#define RESOURCE_H
+#pragma once
 
-#define IDR_WAV_DARKSOULS      101
-#define IDR_TEX_DARKSOULS_EN   102
-#define IDR_TEX_DARKSOULS_DE   103
-#define IDR_TEX_DARKSOULS_ES   104
-#define IDR_TEX_DARKSOULS_FR   105
-// Angry Pepe
-#define IDR_WAV_ANGRYPEPE      106
-#define IDR_TEX_ANGRYPEPE      107
+#define IDR_SFX_DARKSOULS       "NXA_SFX_DARKSOULS"
+#define IDB_TEX_DARKSOULS_EN    "NXA_TEX_DARKSOULS_EN"
+#define IDB_TEX_DARKSOULS_DE    "NXA_TEX_DARKSOULS_DE"
+#define IDB_TEX_DARKSOULS_ES    "NXA_TEX_DARKSOULS_ES"
+#define IDB_TEX_DARKSOULS_FR    "NXA_TEX_DARKSOULS_FR"
 
-// GTA
-#define IDR_WAV_GTA            108
-#define IDR_TEX_GTA_EN         109
-#define IDR_TEX_GTA_DE         110
-#define IDR_TEX_GTA_ES         111
-#define IDR_TEX_GTA_FR         112
-#define IDR_TEX_GTA_PHOTO      113
-#define IDR_TEX_GTA_FLASH      114
+#define IDR_SFX_ANGRYPEPE       "NXA_SFX_ANGRYPEPE"
+#define IDB_TEX_ANGRYPEPE       "NXA_TEX_ANGRYPEPE"
 
-// Rytlock
-#define IDR_WAV_RYTLOCK        115
-#define IDR_TEX_RYTLOCK_0      116
-#define IDR_TEX_RYTLOCK_1      117
-#define IDR_TEX_RYTLOCK_2      118
-#define IDR_TEX_RYTLOCK_3      119
-#define IDR_TEX_RYTLOCK_4      120
-#define IDR_TEX_RYTLOCK_5      121
+#define IDR_SFX_GTA             "NXA_SFX_GTA"
+#define IDB_TEX_GTA_EN          "NXA_TEX_GTA_EN"
+#define IDB_TEX_GTA_DE          "NXA_TEX_GTA_DE"
+#define IDB_TEX_GTA_ES          "NXA_TEX_GTA_ES"
+#define IDB_TEX_GTA_FR          "NXA_TEX_GTA_FR"
+#define IDB_TEX_GTA_PHOTO       "NXA_TEX_GTA_PHOTO"
+#define IDB_TEX_GTA_FLASH       "NXA_TEX_GTA_FLASH"
 
-// Sekiro
-#define IDR_WAV_SEKIRO         122
-#define IDR_TEX_SEKIRO         123
-#define IDR_TEX_SEKIRO_OUT     124
+#define IDR_SFX_RYTLOCK         "NXA_SFX_RYTLOCK"
+#define IDB_TEX_RYTLOCK_0       "NXA_TEX_RYTLOCK_0"
+#define IDB_TEX_RYTLOCK_1       "NXA_TEX_RYTLOCK_1"
+#define IDB_TEX_RYTLOCK_2       "NXA_TEX_RYTLOCK_2"
+#define IDB_TEX_RYTLOCK_3       "NXA_TEX_RYTLOCK_3"
+#define IDB_TEX_RYTLOCK_4       "NXA_TEX_RYTLOCK_4"
+#define IDB_TEX_RYTLOCK_5       "NXA_TEX_RYTLOCK_5"
 
-// WinXP
-#define IDR_WAV_WINXP          125
-#define IDR_TEX_WINXP          126
+#define IDR_SFX_SEKIRO          "NXA_SFX_SEKIRO"
+#define IDB_TEX_SEKIRO          "NXA_TEX_SEKIRO"
+#define IDB_TEX_SEKIRO_OUT      "NXA_TEX_SEKIRO_OUT"
 
-// Fonts
-#define IDR_FONT_ATHELAS       127
-#define IDR_FONT_CONSOLA       128
+#define IDR_SFX_WINXP           "NXA_SFX_WINXP"
+#define IDB_TEX_WINXP           "NXA_TEX_WINXP"
 
-#endif // RESOURCE_H
+#define IDR_FONT_ATHELAS        "NXA_FONT_ATHELAS"
+#define IDR_FONT_CONSOLA        "NXA_FONT_CONSOLA"
+
+#define IDR_DATA_LOCALIZATION   "NXA_DATA_LOCALIZATION"

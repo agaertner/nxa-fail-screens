@@ -1,9 +1,11 @@
 #include "Addon.h"
 #include "Settings.h"
+
 #include "imgui/imgui.h"
 #include "services/Gw2MumbleService.h"
 #include "services/NexusService.h"
 #include "services/RealTimeApiService.h"
+
 
 extern HMODULE hSelf;
 
@@ -28,7 +30,10 @@ namespace Nekres {
         std::filesystem::create_directories(m_addonPath);
         Settings::Load(m_settingsPath);
 
-        Services::m_audio = new AudioManager(m_api);
+        NexusSDK::Initialize(m_api, hSelf, m_addonPath);
+        NexusSDK::Audio->SetMasterVolume(Settings::MasterVolume);
+        NexusSDK::Audio->SetChannelVolume("UI", Settings::UIVolume);
+        NexusSDK::Audio->SetChannelVolume("Screen", Settings::ScreenVolume);
 #ifdef USE_MUMBLE
         Services::m_mumble = new Services::Gw2MumbleService(m_api);
 #endif
@@ -39,11 +44,34 @@ namespace Nekres {
         Services::m_rtapi = new Services::RealTimeApiService(m_api);
 #endif
 
-        Services::Local(m_addonPath);
 
+
+        HRSRC hRes = FindResourceA(hSelf, IDR_DATA_LOCALIZATION, (LPCSTR)RT_RCDATA);
+        if (hRes) {
+            HGLOBAL hData = LoadResource(hSelf, hRes);
+            if (hData) {
+                DWORD size = SizeofResource(hSelf, hRes);
+                const char* data = (const char*)LockResource(hData);
+                if (data && size > 0) {
+                    std::string defaultJsonString(data, size);
+                    NexusSDK::Local->SetDefault(defaultJsonString);
+                }
+            }
+        }
+
+        auto langProvider = [this]() -> int {
+#ifdef USE_RTAPI
+            if (Services::m_rtapi && Services::m_rtapi->Data()) {
+                return Services::m_rtapi->Data()->Language;
+            }
+#endif
+            return 0;
+        };
+        NexusSDK::Local->SetLanguageProvider(langProvider);
+        NexusSDK::SDKLocal->SetLanguageProvider(langProvider);
         m_orchestrator = std::make_unique<ScreenOrchestrator>(m_api, hSelf);
         m_deathMonitor = std::make_unique<DeathMonitor>(m_api);
-        m_settingsUI = std::make_unique<SettingsUI>(m_settingsPath);
+        m_settingsUI = std::make_unique<SettingsUI>(m_settingsPath, m_addonDef);
 
         m_deathMonitor->SetCallbacks(
             [this](int language) { m_orchestrator->TriggerDeath(language); },
@@ -70,10 +98,7 @@ namespace Nekres {
         m_deathMonitor.reset();
         m_settingsUI.reset();
 
-        FailScreen::ClearResources(m_api);
-
-        delete Services::m_audio;
-        Services::m_audio = nullptr;
+        NexusSDK::Shutdown();
 #ifdef USE_MUMBLE
         delete Services::m_mumble;
         Services::m_mumble = nullptr;
@@ -86,8 +111,7 @@ namespace Nekres {
         delete Services::m_rtapi;
         Services::m_rtapi = nullptr;
 #endif
-        delete Services::m_localManager;
-        Services::m_localManager = nullptr;
+
         Settings::Save(m_settingsPath);
         m_instance = nullptr;
     }
@@ -95,12 +119,25 @@ namespace Nekres {
     void Addon::Render()
     {
         m_deathMonitor->Update(m_orchestrator->IsPreviewing());
+        
+        ImFont* defaultFont = NexusSDK::Content->GetFont("NXA_FONT_MENOMONIA", 18.0f);
+        if (defaultFont) ImGui::PushFont(defaultFont);
+        
         m_orchestrator->Render();
+        
+        NexusSDK::UI::RenderDialogs();
+        
+        if (defaultFont) ImGui::PopFont();
     }
 
     void Addon::Options()
     {
-        m_settingsUI->Draw();
+        ImFont* defaultFont = NexusSDK::Content->GetFont("NXA_FONT_MENOMONIA", 18.0f);
+        if (defaultFont) ImGui::PushFont(defaultFont);
+        
+        m_settingsUI->Render();
+        
+        if (defaultFont) ImGui::PopFont();
     }
 
     UINT Addon::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

@@ -10,3 +10,6 @@
 [submodule "submodules/nexus-mumble"]
 	path = submodules/nexus-mumble
 	url = https://github.com/RaidcoreGG/RCGG-lib-mumble-api.git
+[submodule "submodules/lib-nxa-sdk"]
+	path = submodules/lib-nxa-sdk
+	url = https://github.com/agaertner/lib-nxa-sdk.git
