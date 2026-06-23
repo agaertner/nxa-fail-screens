@@ -21,7 +21,6 @@ namespace Nekres {
 
         // Master Volume Slider
         auto volSlider = std::make_shared<NexusSDK::UI::Slider>(local->GetString("Settings_MasterVolume"), &Settings::MasterVolume, 0.0f, 1.0f);
-        volSlider->SetSize(ImVec2(250, 0));
         volSlider->LabelWidth = maxLabelWidth;
         volSlider->OnValueChanged = [this](float val) {
             Settings::Save(m_settingsPath);
@@ -31,12 +30,11 @@ namespace Nekres {
 
         // Add extra padding after Master Volume
         auto padding = std::make_shared<NexusSDK::UI::ControlBase>();
-        padding->SetSize(ImVec2(0, 16)); // Spacer
+        padding->SetSize(0, 16); // Spacer
         flowPanel->AddChild(padding);
 
         // UI Volume Slider
         auto uiVolSlider = std::make_shared<NexusSDK::UI::Slider>(local->GetString("Settings_UIVolume"), &Settings::UIVolume, 0.0f, 1.0f);
-        uiVolSlider->SetSize(ImVec2(250, 0));
         uiVolSlider->LabelWidth = maxLabelWidth;
         uiVolSlider->OnValueChanged = [this](float val) {
             static auto lastClickTime = std::chrono::steady_clock::now() - std::chrono::milliseconds(500);
@@ -53,7 +51,6 @@ namespace Nekres {
 
         // Screen Volume Slider
         auto screenVolSlider = std::make_shared<NexusSDK::UI::Slider>(local->GetString("Settings_ScreenVolume"), &Settings::ScreenVolume, 0.0f, 1.0f);
-        screenVolSlider->SetSize(ImVec2(250, 0));
         screenVolSlider->LabelWidth = maxLabelWidth;
         screenVolSlider->OnValueChanged = [this](float val) {
             static auto lastSekiroTime = std::chrono::steady_clock::now() - std::chrono::milliseconds(1000);

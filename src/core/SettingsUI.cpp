@@ -6,14 +6,15 @@
 
 namespace Nekres {
 
-    void ContentArea::OnRender() {
+    void ContentArea::OnDraw(const NexusSDK::UI::Rectangle& bounds, float scale) {
         ImGui::PushStyleColor(ImGuiCol_ChildBg, UI::Theme::BackgroundContent);
         ImVec2 padding = ImGui::GetStyle().WindowPadding;
-        padding.x += 5.0f;
-        padding.y += 5.0f;
+        padding.x += 5.0f * scale;
+        padding.y += 5.0f * scale;
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, padding);
         
-        bool isVisible = ImGui::BeginChild(m_id.c_str(), m_size, true);
+        ImGui::SetCursorScreenPos(bounds.GetMin());
+        bool isVisible = ImGui::BeginChild(m_id.c_str(), ImVec2(bounds.Width, bounds.Height), true);
         ImGui::PopStyleVar();
         ImGui::PopStyleColor();
 
@@ -28,7 +29,12 @@ namespace Nekres {
             ImGui::PushStyleColor(ImGuiCol_HeaderHovered, UI::Theme::AccentHover);
             ImGui::PushStyleColor(ImGuiCol_HeaderActive, UI::Theme::Accent);
 
-            RenderChildren();
+            NexusSDK::UI::Rectangle clientBounds = bounds;
+            ImVec2 scrolledPos = ImGui::GetCursorScreenPos();
+            clientBounds.X = scrolledPos.x;
+            clientBounds.Y = scrolledPos.y;
+
+            DrawChildren(clientBounds, scale);
 
             ImGui::PopStyleColor(3);
         }
@@ -86,7 +92,7 @@ namespace Nekres {
         m_generalPage->SetCallbacks(previewCb, stopCb);
     }
 
-    void SettingsUI::OnRender()
+    void SettingsUI::OnDraw(const NexusSDK::UI::Rectangle& bounds, float scale)
     {
         ImFont* fontUI = nullptr;
         if (Services::m_nexus && Services::m_nexus->Core()) {
@@ -97,13 +103,13 @@ namespace Nekres {
             ImGui::PushFont(fontUI);
         }
 
-        float footerHeight = ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y * 3.0f + 5.0f;
+        float footerHeight = (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y * 3.0f + 5.0f) * scale;
 
-        m_mainBody->SetSize(ImVec2(0, -footerHeight));
-        m_sidebarMenu->SetSize(ImVec2(140, 0));
-        m_contentPanel->SetSize(ImVec2(0, 0));
+        m_mainBody->SetSize(0, -footerHeight / scale);
+        m_sidebarMenu->SetSize(140, 0);
+        m_contentPanel->SetSize(0, 0);
 
-        FlowPanel::OnRender();
+        FlowPanel::OnDraw(bounds, scale);
 
         if (fontUI) {
             ImGui::PopFont();

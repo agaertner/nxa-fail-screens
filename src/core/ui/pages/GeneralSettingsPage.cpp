@@ -8,15 +8,7 @@
 
 namespace Nekres {
 
-    class ImGuiControl : public NexusSDK::UI::ControlBase {
-    public:
-        std::function<void()> DrawFn;
-        ImGuiControl(std::function<void()> drawFn) : DrawFn(drawFn) {}
-    protected:
-        void OnRender() override {
-            if (DrawFn) DrawFn();
-        }
-    };
+    // We don't need ImGuiControl anymore; we will use standard OOP layouts.
 
     GeneralSettingsPage::GeneralSettingsPage(const std::filesystem::path& settingsPath)
         : Container(), m_settingsPath(settingsPath)
@@ -39,7 +31,7 @@ namespace Nekres {
         };
 
         auto combo = std::make_shared<NexusSDK::UI::Dropdown>("DefeatedScreen", &Settings::ActiveScreen, screens, local->GetString("Settings_DefeatedScreen").c_str());
-        combo->SetSize(ImVec2(220, 0));
+        combo->SetSize(350.0f, 0); // Total width
         combo->OnSelectionChanged = [this](int val) {
             Settings::ActiveScreen = val;
             Settings::Save(m_settingsPath);
@@ -50,26 +42,29 @@ namespace Nekres {
         previewBtn->OnClick = [this]() {
             if (m_onPreview) m_onPreview();
         };
+        previewBtn->SetPosition(0.0f, -2.0f); // align vertically with dropdown
 
-        auto comboAndPreview = std::make_shared<ImGuiControl>([combo, previewBtn]() {
-            combo->Render();
-            ImGui::SameLine(0.0f, 8.0f);
-            
-            // Adjust Preview button vertical position to align with the dropdown box
-            float currentY = ImGui::GetCursorPosY();
-            ImGui::SetCursorPosY(currentY - 2.0f); // align vertically with dropdown
-            previewBtn->Render();
-        });
+        auto comboAndPreview = std::make_shared<NexusSDK::UI::FlowPanel>();
+        comboAndPreview->ControlFlowDirection = NexusSDK::UI::FlowDirection::LeftToRight;
+        comboAndPreview->ControlPadding = 8.0f;
+        comboAndPreview->SetSize(0, 30); // Approximate height so FlowPanel tracks it
+        comboAndPreview->AddChild(combo);
+        comboAndPreview->AddChild(previewBtn);
         
         flowPanel->AddChild(comboAndPreview);
 
-        flowPanel->AddChild(std::make_shared<ImGuiControl>([]() { ImGui::Separator(); }));
+        // We can use a spacer or label with dashes instead of ImGui::Separator for pure OOP, but
+        // for now a simple transparent panel with spacing works.
+        auto spacer1 = std::make_shared<NexusSDK::UI::ControlBase>();
+        spacer1->SetSize(0, 10);
+        flowPanel->AddChild(spacer1);
 
         // Randomize Screen block
         auto randCheck = std::make_shared<NexusSDK::UI::Checkbox>(local->GetString("Settings_Randomize"), &Settings::Randomize);
         randCheck->OnCheckedChanged = [this](bool val) {
             Settings::Save(m_settingsPath);
         };
+        flowPanel->AddChild(randCheck);
 
         auto checkDS = std::make_shared<NexusSDK::UI::Checkbox>(local->GetString("Screen_DarkSouls"), &Settings::EnableDarkSouls);
         checkDS->OnCheckedChanged = [this](bool val) { Settings::Save(m_settingsPath); };
@@ -89,24 +84,30 @@ namespace Nekres {
         auto checkWinXp = std::make_shared<NexusSDK::UI::Checkbox>(local->GetString("Screen_WinXP"), &Settings::EnableWinXp);
         checkWinXp->OnCheckedChanged = [this](bool val) { Settings::Save(m_settingsPath); };
 
-        auto randGroup = std::make_shared<ImGuiControl>([local, randCheck, checkDS, checkGTA, checkRyt, checkPepe, checkSek, checkWinXp]() {
-            randCheck->Render();
+        auto subGroup = std::make_shared<NexusSDK::UI::FlowPanel>();
+        subGroup->ControlFlowDirection = NexusSDK::UI::FlowDirection::TopToBottom;
+        subGroup->ControlPadding = 0.0f;
+        subGroup->SetPosition(20.0f, 0.0f); // Indent by 20px
+        
+        auto subLabel = std::make_shared<NexusSDK::UI::Label>(local->GetString("Settings_IncludeInRandomizer"));
+        subLabel->WrapText = false;
+        subGroup->AddChild(subLabel);
+        subGroup->AddChild(checkDS);
+        subGroup->AddChild(checkGTA);
+        subGroup->AddChild(checkRyt);
+        subGroup->AddChild(checkPepe);
+        subGroup->AddChild(checkSek);
+        subGroup->AddChild(checkWinXp);
 
-            if (Settings::Randomize) {
-                ImGui::Indent();
-                ImGui::TextUnformatted(local->GetString("Settings_IncludeInRandomizer").c_str());
-                
-                checkDS->Render();
-                checkGTA->Render();
-                checkRyt->Render();
-                checkPepe->Render();
-                checkSek->Render();
-                checkWinXp->Render();
-                
-                ImGui::Unindent();
-            }
-        });
-        flowPanel->AddChild(randGroup);
+        // Apply initial visibility
+        subGroup->SetVisible(Settings::Randomize);
+
+        randCheck->OnCheckedChanged = [this, subGroup](bool val) {
+            Settings::Save(m_settingsPath);
+            subGroup->SetVisible(val);
+        };
+
+        flowPanel->AddChild(subGroup);
     }
 
     void GeneralSettingsPage::SetCallbacks(std::function<void()> previewCb, std::function<void()> stopCb)

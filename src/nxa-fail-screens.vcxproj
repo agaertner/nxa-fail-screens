@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -188,6 +188,7 @@
     <ClInclude Include="..\submodules\imgui\imstb_truetype.h" />
     <ClInclude Include="thirdparty\nlohmann\json.hpp" />
     <ClInclude Include="Version.h" />
+    <ClInclude Include="..\submodules\lib-nxa-sdk\src\ui\Viewport.h" />
     <ClInclude Include="..\submodules\lib-nxa-sdk\src\ui\controls\StandardDialog.h" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +227,7 @@
     <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\Slider.cpp" />
     <ClCompile Include="..\submodules\lib-nxa-sdk\src\utils\AsyncFont.cpp" />
     <ClCompile Include="..\submodules\lib-nxa-sdk\src\utils\AsyncTexture.cpp" />
+    <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\Viewport.cpp" />
     <ClCompile Include="..\submodules\lib-nxa-sdk\src\ui\controls\StandardDialog.cpp" />
   </ItemGroup>
   <ItemGroup>

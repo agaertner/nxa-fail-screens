@@ -13,6 +13,7 @@ namespace Nekres::Services
 
             Mumble::Data* Data() const;
             Mumble::Identity* Identity() const;
+            float GetUIScale() const;
 
         private:
             inline static Gw2MumbleService* m_instance = nullptr;

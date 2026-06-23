@@ -8,8 +8,10 @@ namespace Nekres::UI {
     {
     }
 
-    void Footer::OnRender()
+    void Footer::OnDraw(const NexusSDK::UI::Rectangle& bounds, float scale)
     {
+        ImGui::SetCursorScreenPos(bounds.GetMin());
+        
         ImGui::Spacing();
         ImGui::Separator();
         ImGui::Spacing();

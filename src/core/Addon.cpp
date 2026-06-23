@@ -125,7 +125,13 @@ namespace Nekres {
         
         m_orchestrator->Render();
         
-        NexusSDK::UI::RenderDialogs();
+        float uiScale = 1.0f;
+#ifdef USE_MUMBLE
+        if (Services::m_mumble) {
+            uiScale = Services::m_mumble->GetUIScale();
+        }
+#endif
+        NexusSDK::Render(uiScale);
         
         if (defaultFont) ImGui::PopFont();
     }
@@ -134,8 +140,13 @@ namespace Nekres {
     {
         ImFont* defaultFont = NexusSDK::Content->GetFont("NXA_FONT_MENOMONIA", 18.0f);
         if (defaultFont) ImGui::PushFont(defaultFont);
-        
-        m_settingsUI->Render();
+        NexusSDK::UI::Rectangle bounds;
+        bounds.X = ImGui::GetCursorScreenPos().x;
+        bounds.Y = ImGui::GetCursorScreenPos().y;
+        bounds.Width = ImGui::GetContentRegionAvail().x;
+        bounds.Height = ImGui::GetContentRegionAvail().y;
+
+        m_settingsUI->Draw(bounds, 1.0f);
         
         if (defaultFont) ImGui::PopFont();
     }
@@ -150,6 +161,19 @@ namespace Nekres {
                 }
             }
         }
+        // Input Capture Routing
+        if (uMsg >= 0x0200 && uMsg <= 0x020E) {
+            if (NexusSDK::UI::Viewport::Get()) {
+                float xPos = (float)(short)(lParam & 0xFFFF);
+                float yPos = (float)(short)((lParam >> 16) & 0xFFFF);
+                
+                auto capType = NexusSDK::UI::Viewport::Get()->HitTest(ImVec2(xPos, yPos));
+                if (capType == NexusSDK::UI::CaptureType::Capture) {
+                    return 0; // Block game
+                }
+            }
+        }
+
         return uMsg;
     }
 }

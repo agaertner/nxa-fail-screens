@@ -19,7 +19,7 @@ namespace Nekres {
         virtual ~ContentArea() = default;
         std::string HeaderTitle;
     protected:
-        virtual void OnRender() override;
+        virtual void OnDraw(const NexusSDK::UI::Rectangle& bounds, float scale) override;
     };
 
     class SettingsUI : public NexusSDK::UI::FlowPanel {
@@ -30,7 +30,7 @@ namespace Nekres {
         void SetCallbacks(std::function<void()> previewCb, std::function<void()> stopCb);
 
     protected:
-        virtual void OnRender() override;
+        virtual void OnDraw(const NexusSDK::UI::Rectangle& bounds, float scale) override;
 
     private:
         std::filesystem::path m_settingsPath;

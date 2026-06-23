@@ -25,4 +25,17 @@ Mumble::Identity* Nekres::Services::Gw2MumbleService::Identity() const
 {
     return m_identity;
 }
+
+float Nekres::Services::Gw2MumbleService::GetUIScale() const
+{
+    if (!m_identity) return 1.0f;
+    
+    switch (m_identity->UISize) {
+        case Mumble::EUIScale::Small: return 0.897f;
+        case Mumble::EUIScale::Normal: return 1.0f;
+        case Mumble::EUIScale::Large: return 1.111f;
+        case Mumble::EUIScale::Larger: return 1.222f;
+        default: return 1.0f;
+    }
+}
 #endif

@@ -11,7 +11,7 @@ namespace Nekres::UI {
         virtual ~Footer() = default;
 
     protected:
-        virtual void OnRender() override;
+        virtual void OnDraw(const NexusSDK::UI::Rectangle& bounds, float scale) override;
 
     private:
         AddonDefinition_t* m_addonDef;
