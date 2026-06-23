@@ -65,13 +65,6 @@ namespace Nekres {
         };
         flowPanel->AddChild(screenVolSlider);
 
-        auto testDialogBtn = std::make_shared<NexusSDK::UI::Button>("btn_test_dialog", "Test Dialog");
-        testDialogBtn->OnClick = []() {
-            NexusSDK::UI::StandardDialog::Show("Are you sure you want to test the dialog? This is a very long text to test wrapping of the dialog content.", NexusSDK::UI::DialogIcon::Exclamation, {
-                NexusSDK::UI::DialogButton::Yes(),
-                NexusSDK::UI::DialogButton::No()
-            });
-        };
-        flowPanel->AddChild(testDialogBtn);
+
     }
 }

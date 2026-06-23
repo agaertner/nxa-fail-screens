@@ -87,11 +87,15 @@ namespace Nekres {
         auto subGroup = std::make_shared<NexusSDK::UI::FlowPanel>();
         subGroup->ControlFlowDirection = NexusSDK::UI::FlowDirection::TopToBottom;
         subGroup->ControlPadding = 0.0f;
-        subGroup->SetPosition(20.0f, 0.0f); // Indent by 20px
+        subGroup->SetPosition(20.0f, -4.0f); // Indent by 20px, push up 4px to hug the Randomize checkbox
         
         auto subLabel = std::make_shared<NexusSDK::UI::Label>(local->GetString("Settings_IncludeInRandomizer"));
         subLabel->WrapText = false;
         subGroup->AddChild(subLabel);
+        
+        auto spacer2 = std::make_shared<NexusSDK::UI::ControlBase>();
+        spacer2->SetSize(0, 4);
+        subGroup->AddChild(spacer2);
         subGroup->AddChild(checkDS);
         subGroup->AddChild(checkGTA);
         subGroup->AddChild(checkRyt);

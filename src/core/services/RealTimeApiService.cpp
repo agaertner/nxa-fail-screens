@@ -21,4 +21,9 @@ RealTimeData* Nekres::Services::RealTimeApiService::Data() const
 {
     return m_rtdata;
 }
+
+bool Nekres::Services::RealTimeApiService::IsAvailable() const
+{
+    return m_rtdata != nullptr && m_rtdata->GameBuild != 0;
+}
 #endif

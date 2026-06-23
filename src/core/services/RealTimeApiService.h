@@ -13,6 +13,7 @@ namespace Nekres::Services
             ~RealTimeApiService();
 
             RealTimeData* Data() const;
+            bool IsAvailable() const;
 
         private:
             inline static RealTimeApiService* m_instance = nullptr;

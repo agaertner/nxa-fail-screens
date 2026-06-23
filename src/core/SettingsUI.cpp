@@ -42,10 +42,8 @@ namespace Nekres {
     }
 
     SettingsUI::SettingsUI(const std::filesystem::path& settingsPath, AddonDefinition_t* addonDef)
-        : FlowPanel(), m_settingsPath(settingsPath), m_addonDef(addonDef)
+        : Container(), m_settingsPath(settingsPath), m_addonDef(addonDef)
     {
-        ControlFlowDirection = NexusSDK::UI::FlowDirection::TopToBottom;
-        ControlPadding = 0.0f;
 
         m_mainBody = std::make_shared<NexusSDK::UI::FlowPanel>();
         m_mainBody->ControlFlowDirection = NexusSDK::UI::FlowDirection::LeftToRight;
@@ -105,11 +103,26 @@ namespace Nekres {
 
         float footerHeight = (ImGui::GetTextLineHeightWithSpacing() + ImGui::GetStyle().ItemSpacing.y * 3.0f + 5.0f) * scale;
 
-        m_mainBody->SetSize(0, -footerHeight / scale);
         m_sidebarMenu->SetSize(140, 0);
-        m_contentPanel->SetSize(0, 0);
 
-        FlowPanel::OnDraw(bounds, scale);
+        ImGui::SetCursorScreenPos(bounds.GetMin());
+        if (ImGui::BeginChild(m_id.c_str(), ImVec2(bounds.Width, bounds.Height), false, ImGuiWindowFlags_NoBackground)) {
+            NexusSDK::UI::Rectangle clientBounds;
+            clientBounds.X = ImGui::GetCursorScreenPos().x;
+            clientBounds.Y = ImGui::GetCursorScreenPos().y;
+            clientBounds.Width = bounds.Width;
+            clientBounds.Height = bounds.Height;
+
+            NexusSDK::UI::Rectangle bodyBounds = clientBounds;
+            bodyBounds.Height = clientBounds.Height - footerHeight;
+            m_mainBody->Draw(bodyBounds, scale);
+
+            NexusSDK::UI::Rectangle footerBounds = clientBounds;
+            footerBounds.Y = clientBounds.Y + clientBounds.Height - footerHeight;
+            footerBounds.Height = footerHeight;
+            m_footer->Draw(footerBounds, scale);
+        }
+        ImGui::EndChild();
 
         if (fontUI) {
             ImGui::PopFont();

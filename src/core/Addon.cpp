@@ -5,6 +5,7 @@
 #include "services/Gw2MumbleService.h"
 #include "services/NexusService.h"
 #include "services/RealTimeApiService.h"
+#include <lib-nxa-sdk/src/ui/controls/StandardDialog.h>
 
 
 extern HMODULE hSelf;
@@ -116,8 +117,33 @@ namespace Nekres {
         m_instance = nullptr;
     }
 
+    void Addon::VerifyRealTimeApi()
+    {
+#ifdef USE_RTAPI
+        static auto startTime = std::chrono::steady_clock::now();
+        static bool rtApiChecked = false;
+        static bool rtApiAvailable = false;
+        
+        if (Services::m_rtapi && Services::m_rtapi->IsAvailable()) {
+            rtApiAvailable = true;
+        }
+
+        if (!rtApiChecked) {
+            auto now = std::chrono::steady_clock::now();
+            if (std::chrono::duration_cast<std::chrono::seconds>(now - startTime).count() > 5) {
+                rtApiChecked = true;
+                if (!rtApiAvailable) {
+                    std::string msg = NexusSDK::Local->GetString("RTAPI_Missing", { m_addonDef->Name });
+                    NexusSDK::UI::StandardDialog::Show(msg, NexusSDK::UI::DialogIcon::Exclamation, { NexusSDK::UI::DialogButton::OK() });
+                }
+            }
+        }
+#endif
+    }
+
     void Addon::Render()
     {
+        VerifyRealTimeApi();
         m_deathMonitor->Update(m_orchestrator->IsPreviewing());
         
         ImFont* defaultFont = NexusSDK::Content->GetFont("NXA_FONT_MENOMONIA", 18.0f);

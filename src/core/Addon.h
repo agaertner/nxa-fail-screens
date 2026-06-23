@@ -52,6 +52,8 @@ namespace Nekres {
 
             static void AddonRender() { m_instance->Render(); }
             static void AddonOptions() { m_instance->Options(); }
+            
+            void VerifyRealTimeApi();
     };
 }
 #endif

@@ -71,5 +71,11 @@
         "fr": "M O R T",
         "de": "T O D",
         "es": "M U E R T E"
+    },
+    "RTAPI_Missing": {
+        "en": "<b><c=#ff3333>RealTime API not installed.</c></b>\n<c=#3399ff>{0}</c> requires the <c=#3399ff>RealTime API</c> to detect if you are alive or defeated.\nPlease install the RealTime API from the Nexus addon library and enable it.",
+        "de": "<b><c=#ff3333>RealTime API nicht installiert.</c></b>\n<c=#3399ff>{0}</c> erfordert die <c=#3399ff>RealTime API</c>, um festzustellen, ob du am Leben oder besiegt bist.\nBitte installiere die RealTime API aus der Nexus Addon-Bibliothek und aktiviere sie.",
+        "fr": "<b><c=#ff3333>RealTime API non installée.</c></b>\n<c=#3399ff>{0}</c> nécessite l'<c=#3399ff>API RealTime</c> pour détecter si vous êtes en vie ou vaincu.\nVeuillez installer l'API RealTime à partir de la bibliothèque d'extensions Nexus et l'activer.",
+        "es": "<b><c=#ff3333>RealTime API no instalada.</c></b>\n<c=#3399ff>{0}</c> requiere la <c=#3399ff>API RealTime</c> para detectar si est\u00e1s vivo o derrotado.\nInstale la API RealTime de la biblioteca de complementos de Nexus y act\u00edvela."
     }
 }

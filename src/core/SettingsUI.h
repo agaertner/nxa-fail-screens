@@ -22,7 +22,7 @@ namespace Nekres {
         virtual void OnDraw(const NexusSDK::UI::Rectangle& bounds, float scale) override;
     };
 
-    class SettingsUI : public NexusSDK::UI::FlowPanel {
+    class SettingsUI : public NexusSDK::UI::Container {
     public:
         SettingsUI(const std::filesystem::path& settingsPath, AddonDefinition_t* addonDef);
         virtual ~SettingsUI() = default;
